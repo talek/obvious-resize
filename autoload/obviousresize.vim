@@ -11,18 +11,23 @@ set cpo&vim
 
 " Whenever or not there is a window on the provided side.
 function! s:HasWindow(side)
+  " ignore events
+  let _eventignore = &eventignore
+  set eventignore=all
   let result = 0
   let crr_win = winnr()
   exe 'wincmd ' . a:side
   if winnr() != crr_win
     let result = 1
-    wincmd p
+    exe crr_win . 'wincmd w'
   endif
+  let &eventignore = _eventignore
   return result
 endfunction
 
 " Resize the current window at the provided direction
 function! obviousresize#Resize(dir)
+  let crr_win = winnr()
   if a:dir == 'h'
     " resize to the left
     if s:HasWindow('h') && !s:HasWindow('l')
@@ -32,7 +37,7 @@ function! obviousresize#Resize(dir)
       " it has an window on the left and on the right. 
       wincmd l
       wincmd >
-      wincmd p
+      exe crr_win . 'wincmd w'
     elseif s:HasWindow('l') && !s:HasWindow('h')
       wincmd <
     endif
@@ -43,7 +48,7 @@ function! obviousresize#Resize(dir)
     elseif s:HasWindow('l') && s:HasWindow('h')
       wincmd l
       wincmd <
-      wincmd p
+      exe crr_win . 'wincmd w'
     elseif s:HasWindow('h') && !s:HasWindow('l')
       wincmd <
     endif
@@ -57,7 +62,7 @@ function! obviousresize#Resize(dir)
     elseif s:HasWindow('j')
       wincmd j
       wincmd +
-      wincmd p
+      exe crr_win . 'wincmd w'
     endif
   elseif a:dir == 'j'
     if s:HasWindow('j')
@@ -65,7 +70,7 @@ function! obviousresize#Resize(dir)
     elseif s:HasWindow('k')
       wincmd k
       wincmd +
-      wincmd p
+      exe crr_win . 'wincmd w'
     endif
   endif
 endfunction
