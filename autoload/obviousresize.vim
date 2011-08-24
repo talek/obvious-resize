@@ -56,7 +56,9 @@ function! obviousresize#Resize(dir)
     if s:HasWindow('j') && !s:HasWindow('k')
     	wincmd -
     elseif s:HasWindow('j') && s:HasWindow('k')
-      wincmd -
+      wincmd j
+      wincmd +
+      exe crr_win . 'wincmd w'
     elseif s:HasWindow('k')
       wincmd +
     elseif s:HasWindow('j')
