@@ -18,7 +18,7 @@ if exists("g:loaded_obvious_resize")
   finish
 endif
 
-" Current VoraX version
+" Current version
 let g:loaded_obvious_resize = "1.0.0"
 
 " Compatibility stuff handling
