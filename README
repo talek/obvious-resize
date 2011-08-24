@@ -1,0 +1,9 @@
+A plugin for easy resizing of Vim windows.
+
+Just add the following into your .vimrc file:
+
+noremap <silent> <C-Up> :ObviousResizeUp<CR>
+noremap <silent> <C-Down> :ObviousResizeDown<CR>
+noremap <silent> <C-Left> :ObviousResizeLeft<CR>
+noremap <silent> <C-Right> :ObviousResizeRight<CR>
+
