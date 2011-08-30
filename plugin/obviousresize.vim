@@ -19,7 +19,7 @@ if exists("g:loaded_obvious_resize")
 endif
 
 " Current version
-let g:loaded_obvious_resize = "1.0.0"
+let g:loaded_obvious_resize = "1.1"
 
 " Compatibility stuff handling
 let s:keep_cpo = &cpo
