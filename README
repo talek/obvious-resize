@@ -1,6 +1,9 @@
+#Obvious Resize
+
 A plugin for easy resizing of Vim windows.
 
 Just add the following into your .vimrc file:
+
 
 ```
 noremap <silent> <C-Up> :ObviousResizeUp<CR>
