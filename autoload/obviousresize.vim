@@ -26,52 +26,58 @@ function! s:HasWindow(side)
 endfunction
 
 " Resize the current window at the provided direction
-function! obviousresize#Resize(dir)
+function! obviousresize#Resize(dir, ...)
+  if  a:0 == 1
+    let counter = a:1
+  else
+    let counter = 1
+  endif
+
   let crr_win = winnr()
   if a:dir == 'h'
     " resize to the left
     if s:HasWindow('h') && !s:HasWindow('l')
       " it has an window on the left but not on the right
-      wincmd >
+      exe counter . 'wincmd >'
     elseif s:HasWindow('h') && s:HasWindow('l')
       " it has an window on the left and on the right. 
       wincmd l
-      wincmd >
+      exe counter . 'wincmd >'
       exe crr_win . 'wincmd w'
     elseif s:HasWindow('l') && !s:HasWindow('h')
-      wincmd <
+      exe counter . 'wincmd <'
     endif
   elseif a:dir == 'l'
     if s:HasWindow('l') && !s:HasWindow('h')
       " it has an window on the right but no window on the left
-      wincmd >
+      exe counter . 'wincmd >'
     elseif s:HasWindow('l') && s:HasWindow('h')
       wincmd l
-      wincmd <
+      exe counter . 'wincmd <'
       exe crr_win . 'wincmd w'
     elseif s:HasWindow('h') && !s:HasWindow('l')
-      wincmd <
+      exe counter . 'wincmd <'
     endif
   elseif a:dir == 'k'
     if s:HasWindow('j') && !s:HasWindow('k')
-    	wincmd -
+      exe counter . 'wincmd -'
     elseif s:HasWindow('j') && s:HasWindow('k')
       wincmd j
-      wincmd +
+      exe counter . 'wincmd +'
       exe crr_win . 'wincmd w'
     elseif s:HasWindow('k')
-      wincmd +
+      exe counter . 'wincmd +'
     elseif s:HasWindow('j')
       wincmd j
-      wincmd +
+      exe counter . 'wincmd +'
       exe crr_win . 'wincmd w'
     endif
   elseif a:dir == 'j'
     if s:HasWindow('j')
-      wincmd +
+      exe counter . 'wincmd +'
     elseif s:HasWindow('k')
       wincmd k
-      wincmd +
+      exe counter . 'wincmd +'
       exe crr_win . 'wincmd w'
     endif
   endif

@@ -27,22 +27,22 @@ set cpo&vim
 
 " Define obvious resize mappings
 if exists(':ObviousResizeLeft') != 2
-  command! -nargs=0 ObviousResizeLeft :call obviousresize#Resize('h')
+  command! -nargs=* ObviousResizeLeft :call obviousresize#Resize('h', <f-args>)
   nmap <unique> <script> <Plug>ObviousResizeLeft :ObviousResizeLeft<CR>
 endif
 
 if exists(':ObviousResizeRight') != 2
-  command! -nargs=0 ObviousResizeRight :call obviousresize#Resize('l')
+  command! -nargs=* ObviousResizeRight :call obviousresize#Resize('l', <f-args>)
   nmap <unique> <script> <Plug>ObviousResizeRight :ObviousResizeRight<CR>
 endif
 
 if exists(':ObviousResizeUp') != 2
-  command! -nargs=0 ObviousResizeUp :call obviousresize#Resize('k')
+  command! -nargs=* ObviousResizeUp :call obviousresize#Resize('k', <f-args>)
   nmap <unique> <script> <Plug>ObviousResizeUp :ObviousResizeUp<CR>
 endif
 
 if exists(':ObviousResizeDown') != 2
-  command! -nargs=0 ObviousResizeDown :call obviousresize#Resize('j')
+  command! -nargs=* ObviousResizeDown :call obviousresize#Resize('j', <f-args>)
   nmap <unique> <script> <Plug>ObviousResizeDown :ObviousResizeDown<CR>
 endif
 
