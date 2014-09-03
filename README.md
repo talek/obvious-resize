@@ -12,7 +12,7 @@ noremap <silent> <C-Left> :ObviousResizeLeft<CR>
 noremap <silent> <C-Right> :ObviousResizeRight<CR>
 ```
 
-Optionally you can paa a count to :ObviousResize to resize the pain by that amount.
+Optionally you can pass a count to :ObviousResize to resize the pane by that amount.
 
 ```
 noremap <silent> <C-Up> :ObviousResizeUp 5<CR>
