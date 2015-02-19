@@ -31,7 +31,13 @@ endfunction
 
 " Resize the current window at the provided direction
 function! obviousresize#Resize(dir, ...)
-  let counter = a:0 == 1 ? a:1 : g:obvious_resize_default
+  if v:count
+    let counter = v:count
+  elseif a:0 == 1
+    let counter = a:1
+  else
+    let counter = g:obvious_resize_default
+  endif
   let crr_win = winnr()
 
   if a:dir == 'h'
