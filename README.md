@@ -1,4 +1,4 @@
-#Obvious Resize
+# Obvious Resize
 
 A plugin for easy resizing of Vim windows.
 
@@ -12,8 +12,16 @@ noremap <silent> <C-Left> :ObviousResizeLeft<CR>
 noremap <silent> <C-Right> :ObviousResizeRight<CR>
 ```
 
-Optionally you can pass a count to :ObviousResize to resize the pane by that amount.
+## Specifying the Resize Amount
+
+Windows get resized 1 line by default, which you can change in your .vimrc file:
 
 ```
-noremap <silent> <C-Up> :ObviousResizeUp 5<CR>
+let g:obvious_resize_default = 2
+```
+
+You can also specify a count in your remap:
+
+```
+noremap <silent> <C-Up> :<C-U>ObviousResizeUp 5<CR>
 ```
