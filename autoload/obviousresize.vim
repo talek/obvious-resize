@@ -7,7 +7,7 @@ endif
 let g:_loaded_obviousresize = 1
 
 if !exists("g:obvious_resize_default")
-  let g:obvious_resize_default = 2
+  let g:obvious_resize_default = 1
 endif
 
 let s:cpo_save = &cpo
