@@ -4,8 +4,12 @@
 if &cp || exists("g:_loaded_obviousresize") 
  finish
 endif
-
 let g:_loaded_obviousresize = 1
+
+if !exists("g:obvious_resize_default")
+  let g:obvious_resize_default = 2
+endif
+
 let s:cpo_save = &cpo
 set cpo&vim
 
@@ -27,13 +31,15 @@ endfunction
 
 " Resize the current window at the provided direction
 function! obviousresize#Resize(dir, ...)
-  if  a:0 == 1
+  if v:count
+    let counter = v:count
+  elseif a:0 == 1
     let counter = a:1
   else
-    let counter = 1
+    let counter = g:obvious_resize_default
   endif
-
   let crr_win = winnr()
+
   if a:dir == 'h'
     " resize to the left
     if s:HasWindow('h') && !s:HasWindow('l')
@@ -85,4 +91,3 @@ endfunction
 
 let &cpo=s:cpo_save
 unlet s:cpo_save
-
