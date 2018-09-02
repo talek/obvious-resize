@@ -41,50 +41,52 @@ function! obviousresize#Resize(dir, ...)
   let crr_win = winnr()
 
   if a:dir == 'h'
-    " resize to the left
+    " resize left
     if s:HasWindow('h') && !s:HasWindow('l')
-      " it has an window on the left but not on the right
+      " right window
       exe counter . 'wincmd >'
     elseif s:HasWindow('h') && s:HasWindow('l')
-      " it has an window on the left and on the right. 
-      wincmd l
-      exe counter . 'wincmd >'
-      exe crr_win . 'wincmd w'
+      " middle window
+      exe counter . 'wincmd <'
     elseif s:HasWindow('l') && !s:HasWindow('h')
+      " left window
       exe counter . 'wincmd <'
     endif
   elseif a:dir == 'l'
+    " resize right
     if s:HasWindow('l') && !s:HasWindow('h')
-      " it has an window on the right but no window on the left
+      " left window
       exe counter . 'wincmd >'
     elseif s:HasWindow('l') && s:HasWindow('h')
-      wincmd l
-      exe counter . 'wincmd <'
-      exe crr_win . 'wincmd w'
+      " middle window
+      exe counter . 'wincmd >'
     elseif s:HasWindow('h') && !s:HasWindow('l')
+      " right window
       exe counter . 'wincmd <'
-    endif
-  elseif a:dir == 'k'
-    if s:HasWindow('j') && !s:HasWindow('k')
-      exe counter . 'wincmd -'
-    elseif s:HasWindow('j') && s:HasWindow('k')
-      wincmd j
-      exe counter . 'wincmd +'
-      exe crr_win . 'wincmd w'
-    elseif s:HasWindow('k')
-      exe counter . 'wincmd +'
-    elseif s:HasWindow('j')
-      wincmd j
-      exe counter . 'wincmd +'
-      exe crr_win . 'wincmd w'
     endif
   elseif a:dir == 'j'
-    if s:HasWindow('j')
+    " resize down
+    if s:HasWindow('j') && !s:HasWindow('k')
+      " top window
       exe counter . 'wincmd +'
-    elseif s:HasWindow('k')
-      wincmd k
+    elseif s:HasWindow('j') && s:HasWindow('k')
+      " middle window
       exe counter . 'wincmd +'
-      exe crr_win . 'wincmd w'
+    elseif !s:HasWindow('j') && s:HasWindow('k')
+      " botom window
+      exe counter . 'wincmd -'
+    endif
+  elseif a:dir == 'k'
+    " resize up
+    if s:HasWindow('k') && !s:HasWindow('j')
+      " bottom window
+      exe counter . 'wincmd +'
+    elseif s:HasWindow('k') && s:HasWindow('j')
+      " middle window
+      exe counter . 'wincmd -'
+    elseif !s:HasWindow('k') && s:HasWindow('j')
+      " top window
+      exe counter . 'wincmd -'
     endif
   endif
 endfunction
