@@ -1,7 +1,7 @@
 " Description: Obvious-Resize autoload buddy.
 " Mainainder: Alexandru Tica <alexandru.tica.at.gmail.com>
 
-if &cp || exists("g:_loaded_obviousresize") 
+if &cp || exists("g:_loaded_obviousresize")
  finish
 endif
 let g:_loaded_obviousresize = 1
@@ -10,8 +10,25 @@ if !exists("g:obvious_resize_default")
   let g:obvious_resize_default = 1
 endif
 
+if !exists("g:obvious_resize_run_tmux")
+  let g:obvious_resize_run_tmux = 0
+endif
+
 let s:cpo_save = &cpo
 set cpo&vim
+
+function! s:TmuxCommand(args)
+  if !g:obvious_resize_run_tmux
+    return
+  end
+
+  let cmd = 'tmux -S ' . split($TMUX, ',')[0] . ' ' . a:args
+  if exists('*jobstart')
+    call jobstart(cmd)
+  elseif executable('tmux')
+    call system(cmd)
+  endif
+endfunction
 
 " Whenever or not there is a window on the provided side.
 function! s:HasWindow(side)
@@ -51,6 +68,9 @@ function! obviousresize#Resize(dir, ...)
     elseif s:HasWindow('l') && !s:HasWindow('h')
       " left window
       exe counter . 'wincmd <'
+    else
+      " only window
+      call s:TmuxCommand('resize-pane -L ' . counter)
     endif
   elseif a:dir == 'l'
     " resize right
@@ -63,6 +83,9 @@ function! obviousresize#Resize(dir, ...)
     elseif s:HasWindow('h') && !s:HasWindow('l')
       " right window
       exe counter . 'wincmd <'
+    else
+      " only window
+      call s:TmuxCommand('resize-pane -R ' . counter)
     endif
   elseif a:dir == 'j'
     " resize down
@@ -75,6 +98,9 @@ function! obviousresize#Resize(dir, ...)
     elseif !s:HasWindow('j') && s:HasWindow('k')
       " botom window
       exe counter . 'wincmd -'
+    else
+      " only window
+      call s:TmuxCommand('resize-pane -D ' . counter)
     endif
   elseif a:dir == 'k'
     " resize up
@@ -87,6 +113,9 @@ function! obviousresize#Resize(dir, ...)
     elseif !s:HasWindow('k') && s:HasWindow('j')
       " top window
       exe counter . 'wincmd -'
+    else
+      " only window
+      call s:TmuxCommand('resize-pane -U ' . counter)
     endif
   endif
 endfunction
