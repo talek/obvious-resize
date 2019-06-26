@@ -1,9 +1,9 @@
 # Obvious Resize
 
-A plugin for easy resizing of Vim windows.
+This plugin aims to provide an easy way of resizing Vim windows/splits. It
+may also seamlessly integrate with tmux, when the same resize keys are used.
 
 Just add the following into your .vimrc file:
-
 
 ```
 noremap <silent> <C-Up> :<C-U>ObviousResizeUp<CR>
@@ -26,4 +26,11 @@ You can also specify a count in your remap:
 
 ```
 noremap <silent> <C-Up> :<C-U>ObviousResizeUp 5<CR>
+```
+
+If you'd like to have tmux integration (by default is disabled), then you may
+use the following variable:
+
+```
+let g:obvious_resize_run_tmux = 1
 ```

@@ -5,21 +5,12 @@
 "                GPL, Version 3.0
 "                http://www.gnu.org/copyleft/gpl.html
 
-" This plugin may be used to resize Vim windows in an obvious way.
-" Just add the following into your .vimrc file:
-"
-" noremap <silent> <C-Up> :ObviousResizeUp<CR>
-" noremap <silent> <C-Down> :ObviousResizeDown<CR>
-" noremap <silent> <C-Left> :ObviousResizeLeft<CR>
-" noremap <silent> <C-Right> :ObviousResizeRight<CR>
-"
-
-if exists("g:loaded_obvious_resize") 
+if exists("g:loaded_obvious_resize")
   finish
 endif
 
 " Current version
-let g:loaded_obvious_resize = "1.1"
+let g:loaded_obvious_resize = "1.2"
 
 " Compatibility stuff handling
 let s:keep_cpo = &cpo

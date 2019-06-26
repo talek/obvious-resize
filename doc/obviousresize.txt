@@ -1,0 +1,51 @@
+*obviousresize.txt* A sane way of resizing Vim splits.
+
+==============================================================================
+0. Contents                                                    *obviousresize*
+
+    1. Intro ....................................... |obviousresize-intro|
+    2. Configuration settings ...................... |obviousresize-config|
+    3. Mappings .................................... |obviousresize-mappings|
+    4. Source ...................................... |obviousresize-source|
+
+==============================================================================
+1. Intro                                                 *obviousresize-intro*
+
+This plugin aims to provide an easy way of resizing Vim windows/splits. It
+may also seamlessly integrate with tmux, when the same resize keys are used.
+
+==============================================================================
+2. Configuration settings                               *obviousresize-config*
+
+By default, windows get resized by 1 line at time. You may change this using
+the following variable:
+
+    let g:obvious_resize_default = 5
+
+If you'd like to have tmux integration (by default is disabled), then you may
+use the following variable:
+
+    let g:obvious_resize_run_tmux = 1
+
+==============================================================================
+3. Mappings                                           *obviousresize-mappings*
+
+By default, this plugin doesn't define any key mappings. It's up to you to
+define them as you want. For example, you may use the following mappings into
+your .vimrc:
+
+    inoremap <silent> <C-Up> :<C-U>ObviousResizeUp<CR>
+    noremap <silent> <C-Down> :<C-U>ObviousResizeDown<CR>
+    noremap <silent> <C-Left> :<C-U>ObviousResizeLeft<CR>
+    noremap <silent> <C-Right> :<C-U>ObviousResizeRight<CR>
+
+You may also specify a count in your remap:
+
+    noremap <silent> <C-Up> :<C-U>ObviousResizeUp 5<CR>
+
+==============================================================================
+4. Source                                               *obviousresize-source*
+
+https://github.com/talek/obvious-resize
+
+vim:tw=78:et:ft=help:norl:
