@@ -3,6 +3,8 @@
 This plugin aims to provide an easy way of resizing Vim windows/splits. It
 may also seamlessly integrate with tmux, when the same resize keys are used.
 
+![Alt text](obviousresize.gif?raw=true "Obvious-resize with tmux integration")
+
 Just add the following into your .vimrc file:
 
 ```
